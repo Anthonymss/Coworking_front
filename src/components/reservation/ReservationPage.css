@@ -1,0 +1,209 @@
+.reservation-page {
+    padding: 40px;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    background-color: #f5f7fa;
+    top: 4rem;
+    margin-bottom: 4rem;
+    position: relative;
+  }
+  
+  .reservation-error-message {
+    color: #d9534f;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  
+  .reservation-card {
+    display: flex;
+    max-width: 900px;
+    overflow: hidden;
+  }
+  
+  .reservation-space-details {
+    width: 45%;
+    padding: 20px;
+    background: #f9f9fb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .reservation-image-overlay {
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .reservation-space-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .reservation-space-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #34495e;
+    margin-top: 12px;
+    text-align: center;
+  }
+  
+  .reservation-info-section p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 6px 0;
+  }
+  
+  .reservation-equipment-section {
+    margin-top: 15px;
+    width: 100%;
+  }
+  
+  .reservation-equipment-section h3 {
+    font-size: 15px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .reservation-equipment-list {
+    max-height: 120px;
+    overflow-y: auto;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .reservation-equipment-item {
+    font-size: 13px;
+    color: #444;
+    padding: 6px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .reservation-form {
+    width: 55%;
+    padding: 30px;
+    background-color: #ffffff;
+  }
+  
+  .reservation-form h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .reservation-form-group {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .reservation-form-group label {
+    font-size: 13px;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+  
+  .reservation-form-group input,
+  .reservation-form-group select,
+  .reservation-form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: border 0.3s ease;
+  }
+  
+  .reservation-form-group input:focus,
+  .reservation-form-group select:focus,
+  .reservation-form-group textarea:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  .reservation-submit-button {
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reservation-submit-button:hover {
+    background-color: #2980b9;
+  }
+  .reservation-container {
+    background: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10PX;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .reservation-card, .time-slot-container {
+    flex: 1;
+  }
+.view-toggle {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.view-toggle button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #f3f4f6;
+  color: #333333;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  border: none; 
+}
+
+.view-toggle button:hover {
+  background-color: #e8eaee;
+  color: #333333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.view-toggle .active {
+  background-color: #2a9d8f;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.reservation-conteiner-time {
+  flex: 1;
+  padding: 30px;
+  transition: all 0.3s ease-in-out;
+}
+
+.reservation-conteiner-time .timeline-view,
+.reservation-conteiner-time .list-view {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.reservation-conteiner-time .active-view {
+  opacity: 1;
+  transform: translateY(0);
+}

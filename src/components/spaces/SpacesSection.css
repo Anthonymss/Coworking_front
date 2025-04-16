@@ -1,0 +1,114 @@
+.container-spaces {
+  padding: 2rem;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  position: relative;
+  top: 4rem;
+  margin-bottom: 4rem;
+  background-color: rgba(255, 255, 255, 0.63);
+}
+
+.space-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.content-wrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.filter-section {
+  flex: 1;
+  max-width: 300px;
+  padding: 20px;
+  text-align: left;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.filter-section h2 {
+  font-size: 20px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filter-section label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.filter-section select,
+.filter-section input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
+}
+
+.filter-section select:focus,
+.filter-section input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.filter-section .filter-button,
+.filter-section .reset-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.filter-section .filter-button {
+  background-color: #007bff;
+}
+
+.filter-section .filter-button:hover {
+  background-color: #0056b3;
+}
+
+.filter-section .reset-button {
+  background-color: #dc3545;
+}
+
+.filter-section .reset-button:hover {
+  background-color: #a71d2a;
+}
+
+.spaces-list {
+  flex: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+.no-spaces-message {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+  font-weight: 500;
+  position: relative;
+  width: 100%;
+  top: 50%;
+  left: -10rem;
+}

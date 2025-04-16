@@ -1,0 +1,194 @@
+:root {
+  --primary-color: #0b0b0c;
+  --secondary-color: #3f51b5; 
+  --background-color: #e8eaf6;
+  --card-background: #ffffff; 
+  --text-color: #212121;
+  --text-light: #757575; 
+  --border-color: #bdbdbd;
+  --success-color: #66bb6a;
+  --danger-color: #161414b0; 
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.profile-card {
+  background: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(170, 31, 31, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
+  transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.profile-header {
+  display: flex;
+  padding: 40px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-bottom: 4px solid var(--secondary-color);
+  align-items: center;
+}
+
+.avatar-container {
+  position: relative;
+  margin-right: 40px;
+}
+
+.avatar {
+  width: 140px;
+  height: 140px; 
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.avatar:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info h2 {
+  margin: 0;
+  font-size: 32px; 
+  font-weight: 700;
+}
+
+.user-email {
+  font-size: 16px; 
+  opacity: 0.8;
+}
+
+.profile-content {
+  padding: 40px;
+}
+
+.profile-content h3 {
+  margin-top: 0;
+  font-size: 26px; 
+  font-weight: 600;
+}
+
+.edit-button, .save-button, .logout-button, .google-login-button {
+  padding: 12px 24px; 
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.edit-button {
+  background-color: var(--card-background);
+  color: var(--text-color);
+  float: right;
+}
+
+.edit-button:hover {
+  background-color: var(--border-color);
+}
+
+.save-button {
+  background-color: var(--success-color);
+  color: white;
+  margin-top: 20px;
+}
+
+.save-button:hover {
+  background-color: #4caf50;
+}
+
+.logout-button {
+  background-color: var(--danger-color);
+  color: white;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--text-light);
+}
+
+.info-value {
+  font-size: 16px;
+}
+
+.info-input {
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.info-input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px; 
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .avatar-container {
+      margin-right: 0;
+      margin-bottom: 20px;
+  }
+
+  .info-grid {
+      grid-template-columns: 1fr;
+  }
+}

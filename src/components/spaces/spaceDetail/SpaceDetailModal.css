@@ -1,0 +1,156 @@
+.space-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.space-modal-content {
+    background-color: #f9f9f9;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    animation: modalFade 0.3s ease-in-out;
+    transform: scale(1.02);
+}
+
+@keyframes modalFade {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.space-close-button {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #bbb;
+    cursor:  pointer;
+    transition: color 0.3s;
+}
+
+.space-close-button:hover {
+    color: #444;
+    transform: scale(1.1);
+}
+
+.space-modal-body {
+    display: flex;
+}
+
+.space-modal-image-section {
+    flex: 1.5;
+    background-color: #e0e0e0;
+    display: flex;
+}
+
+.space-modal-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0 0 0 16px;
+    animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.space-modal-details {
+    flex: 1.5;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.space-modal-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.space-modal-info {
+    text-align: start;
+}
+
+.space-modal-info p {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 4px 0;
+}
+
+.space-modal-description {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.space-modal-equipment-section {
+    text-align: start;
+    margin-top: 16px;
+}
+
+.space-modal-equipment-section h3 {
+    font-size: 1.1rem;
+    color: #444;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.space-modal-equipment-list {
+    max-height: 120px;
+    overflow-y: auto;
+    padding-right: 10px;
+    border-radius: 2px;
+    background-color: #fafafa;
+    padding: 10px;
+    box-shadow: 0px 2px 6px rgba(187, 190, 202, 0.699);
+}
+
+.space-modal-equipment-item {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.equipment-description {
+    font-size: 0.75rem;
+    color: #66666686;
+}
+
+.space-reserve-button {
+    position: relative;
+    margin-top: 16px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.space-reserve-button:hover {
+    background-color: #0056b3;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.space-reserve-button:active {
+    transform: scale(0.98);
+}

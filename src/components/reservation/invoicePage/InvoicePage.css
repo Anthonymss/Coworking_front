@@ -1,0 +1,170 @@
+.invoice-container {
+    max-width: 750px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 4rem;
+    margin-bottom: 7rem;
+  }
+  
+  .invoice-container h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #0056b3;
+  }
+  
+  .invoice-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .invoice-header .invoice-left,
+  .invoice-header .invoice-right {
+    width: 45%;
+  }
+  
+  .invoice-header p {
+    margin: 5px 0;
+    font-size: 1rem;
+  }
+  
+  .invoice-section {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .invoice-section p {
+    margin: 5px 0;
+    line-height: 1.5;
+    font-size: 1.1rem;
+  }
+  
+  .invoice-section strong {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  .invoice-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    border-top: 2px solid #0056b3;
+    padding-top: 15px;
+  }
+  
+  .invoice-summary p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .invoice-summary .total {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #0056b3;
+  }
+  
+  .print-button {
+    display: block;
+    margin: 30px auto;
+    padding: 12px 25px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .print-button:hover {
+    background-color: #003f7f;
+  }
+  
+  @media print {
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+    }
+  
+    * {
+      visibility: hidden;
+    }
+  
+    .invoice-container, .invoice-container * {
+      visibility: visible;
+    }
+  
+    .invoice-container {
+      max-width: none;
+      margin: 0;
+      padding: 20px;
+      box-shadow: none;
+      border: none;
+    }
+  
+    .invoice-container h1 {
+      font-size: 2rem;
+    }
+  
+    .invoice-section {
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+  
+    .invoice-summary {
+      border-top: 2px solid #0056b3;
+      padding-top: 15px;
+    }
+  
+    .print-button {
+      display: none;
+    }
+    .pdf-download-button{
+        visibility:hidden;
+
+    }
+  }
+  
+.pdf-download-button {
+    display: inline-block;
+    background-color: #34D399;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 0 auto; 
+    display: block; 
+    width: fit-content; 
+    
+  }
+  
+  .pdf-download-button:hover {
+    background-color: #10B981; 
+  }
+  
+  .pdf-download-button.loading {
+    background-color: #9CA3AF; 
+    cursor: not-allowed;
+  }
+  

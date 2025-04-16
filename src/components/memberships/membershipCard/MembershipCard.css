@@ -1,0 +1,90 @@
+.membership-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Padding consistente */
+    width: 100%;
+    max-width: 400px; /* Ancho máximo */
+    margin: 1px auto;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 100%;
+}
+
+.membership-title {
+    font-size: 1.5em; 
+    font-weight: 700; /* Más negrita para el título */
+    color: #2c3e50; 
+    margin-bottom: 15px; 
+}
+
+.membership-card hr {
+    border: none;
+    border-top: 1px solid #ecf0f1; 
+    margin: 15px 0; 
+}
+
+.membership-features,
+.membership-details,
+.membership-details ul,
+.membership-features ul,
+.membership-features li,
+.membership-details li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.membership-features li,
+.membership-details li {
+    background-color: #e7f3fe; 
+    padding: 7px; /* Un poco más de padding */
+    margin: 5px 0;
+    border-radius: 5px;
+    font-size: 0.95em; /* Un tamaño de fuente ligeramente mayor */
+    color: #302c2c; 
+    width: 100%; /* Sin cálculo, ya que está controlado por el box-sizing */
+    box-sizing: border-box; 
+    transition: background-color 0.3s, transform 0.3s; /* Transiciones para el hover */
+}
+
+.membership-features li:hover,
+.membership-details li:hover {
+    background-color: #d0e9ff; 
+    transform: scale(1.02);
+}
+
+.btn-primary {
+    background-color: #3498db; 
+    color: #fff;
+    padding: 14px 20px; /* Aumento del padding para mayor área clickeable */
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; 
+    width: 100%; 
+    margin-top: 15px;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9; 
+    transform: scale(1.05); /* Crecimiento al pasar el mouse */
+}
+
+/* Nuevo contenedor para alinear el precio y el botón */
+.price-button-container {
+    display: flex;
+    flex-direction: column; /* Alinea el precio y el botón en una columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    gap: 10px; /* Espacio entre el precio y el botón */
+    margin-top: 20px;
+}
+
+.pPrice {
+    font-size: 1.5em; /* Tamaño ajustado */
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    margin: 0; /* Asegúrate de que no haya margen adicional */
+    color: #2c3e50;
+}

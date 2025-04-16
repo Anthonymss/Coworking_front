@@ -1,0 +1,209 @@
+.membershipDetail {
+    max-width: 97%;
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 2%;
+    padding: 50px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  
+  .membershipDetail-title {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: #333;
+    margin-bottom: 1%;
+  }
+
+  .membershipDetail-title2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+    margin-top: 10%;
+  }
+  
+  .membershipDetail p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #666;
+  }
+  
+  .membershipDetail img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+    border-radius: 8px;
+  }
+  
+  .membershipDetail img + img {
+    margin-left: 10px;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+}
+
+.main-image {
+    grid-row: 1 / span 2;
+}
+
+.main-image img,
+.small-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.btn-primari {
+  background-color: #3498db; 
+  color: #fff;
+  padding: 24px 30px; /* Aumento del padding para mayor área clickeable */
+  border: none;
+  border-radius: 5px;
+  font-size: 1.3em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; 
+  width: 30%; 
+  margin: 10% 37%;
+}
+
+.btn-primari:hover {
+  background-color: #2980b9; 
+  transform: scale(1.05); /* Crecimiento al pasar el mouse */
+}
+
+.detailService {
+  display: flex; /* Activa flexbox */
+  justify-content: space-between; /* Deja espacio entre el título y el contenido */
+  align-items: flex-start; /* Alinea el contenido en la parte superior */
+  margin-top: 0%;
+  margin-left: 7%;
+  margin-right: 7%;
+  margin-bottom: 5%;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.detailService h3 {
+  flex-basis: 50%;
+  margin: 0; /* Elimina el margen para que quede alineado */
+  margin-right: 10%;
+  font-size: 170%;
+}
+
+.detailService div {
+  flex-basis: 90%; /* Ocupa el 70% del ancho */
+}
+
+.priceDet {
+  color: red;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 300px;
+}
+
+.popup h2 {
+  margin-bottom: 20px;
+}
+
+.popup .btn {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup .btn:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos generales para los popups */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 600px;
+}
+
+.popup h2 {
+  margin-bottom: 20px;
+}
+
+.popup .btn {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup .btn:hover {
+  background-color: #0056b3;
+}
+
+.payment-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.payment-options .btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.payment-options .btn:hover {
+  background-color: #218838;
+}

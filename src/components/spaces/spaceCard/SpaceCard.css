@@ -1,0 +1,119 @@
+.space-card {
+  position: relative;
+  width: 340px;
+  margin: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.space-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.image-container {
+  height: 180px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.space-type-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 0.25rem 0.5rem;
+  background-color: rgba(0, 0, 0, 0.452);
+  color: #fff;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+
+.card-content {
+  padding: 1rem;
+  margin-bottom:-1.6rem;
+}
+
+.space-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.space-capacity {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.price {
+  color: #1d59daea;
+  font-weight: 600;
+  font-size: 1rem;
+  font-size:23px;
+}
+
+.book-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.book-button:hover {
+  background-color: #0056b3;
+}
+
+.space-location {
+  font-size: 0.85rem;
+  color: #888888a2;
+  margin-top: 1rem;
+  text-align: start;
+}
+
+.space-click {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #020202;
+  cursor: pointer;
+  position: relative;
+  justify-content: end;
+  flex-direction: row-reverse;
+  top: -1.3rem;
+  position: relative;
+}
+
+.click-text {
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-size: 0.85rem;
+  color: #1180ff;
+}
+
+.space-click:hover .click-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.space-click .fa-eye {
+  transition: color 0.3s;
+
+}
+
+.space-click:hover .fa-eye {
+  color: #2111ff;
+}
