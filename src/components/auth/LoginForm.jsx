@@ -16,7 +16,6 @@ export default function LoginForm() {
         const token = response.credential;
         try {
             const res = await AuthService.loginForGoogle({ token });
-            console.log('Usuario autenticado:', res.data);
             setUserInfo(res.data);
             if (res.data && res.data.jwt) {
                 const userData = {
@@ -47,7 +46,6 @@ export default function LoginForm() {
         };
         try {
             const res = await AuthService.login(user);
-            console.log('Usuario autenticado:', res.data);
             setUserInfo(res.data);
             if (res.data && res.data.jwt) {
                 const userData = {

@@ -54,7 +54,7 @@
     transform: scale(1.02);
 }
 
-.btn-primary {
+.btn-primary-m {
     background-color: #3498db; 
     color: #fff;
     padding: 14px 20px; /* Aumento del padding para mayor área clickeable */
@@ -67,7 +67,7 @@
     margin-top: 15px;
 }
 
-.btn-primary:hover {
+.btn-primary-m:hover {
     background-color: #2980b9; 
     transform: scale(1.05); /* Crecimiento al pasar el mouse */
 }

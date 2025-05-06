@@ -1,6 +1,6 @@
 .space-card {
   position: relative;
-  width: 340px;
+  width: 315px;
   margin: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -100,7 +100,7 @@
   opacity: 0;
   transform: translateY(5px);
   transition: opacity 0.3s ease, transform 0.3s ease;
-  font-size: 0.85rem;
+  font-size: 0.65rem;
   color: #1180ff;
 }
 

@@ -11,18 +11,27 @@ class UserService {
             }
         });
     }
+
     synchronizeAccountGoogle(email, tokenGoogle) {
         return axios.post(`${API_URL_MANA}/synchronize-google`, {
             token: tokenGoogle,
             email: email
-        }//, {
-           // headers: {
-            //    Authorization: `Bearer ${token}`
-            //}
-        //});
-    )}
-    updateUser(dataToSave){
-        return axios.put(`${API_URL_MANA}/update-user`, dataToSave);
+        });
+    }
+
+    updateUser(userData, file, token) {
+        const formData = new FormData();
+        formData.append("user", new Blob([JSON.stringify(userData)], { type: "application/json" }));
+        if (file) {
+            formData.append("file", file);
+        }
+
+        return axios.put(`${API_URL_MANA}/update-user`, formData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        });
     }
 }
 

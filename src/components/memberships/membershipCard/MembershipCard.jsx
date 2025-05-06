@@ -34,7 +34,7 @@ export default function MembershipCard({ id, name, description, price, duration,
       <strong>Duración:</strong> {duration} días
       <div className="price-button-container">
         <p className="pPrice">${price}</p>
-        <button className="btn btn-primary" onClick={handleClick}>
+        <button className="btn btn-primary-m" onClick={handleClick}>
           Conoce más
         </button>
       </div>

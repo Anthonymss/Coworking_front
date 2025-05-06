@@ -9,25 +9,22 @@ export default function Profile() {
   const [userData, setUserData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [profileImageUrl, setProfileImageUrl] = useState('');
+  const [profileImageFile, setProfileImageFile] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
     const storedUserData = JSON.parse(localStorage.getItem('userData'));
 
-    if (storedUserData && storedUserData.jwt) {
+    if (storedUserData?.jwt) {
       UserService.infoAccount(storedUserData.email, storedUserData.jwt)
         .then(response => {
           setUserData(response.data);
-          setProfileImageUrl(response.data.profileImageUrl);
         })
         .catch(error => {
           console.error('Error fetching user data:', error);
           setIsLoggedIn(false);
         })
-        .finally(() => {
-          setLoading(false);
-        });
+        .finally(() => setLoading(false));
     } else {
       setLoading(false);
       setIsLoggedIn(false);
@@ -40,53 +37,40 @@ export default function Profile() {
   };
 
   const handleSave = () => {
-    const { ...dataToSave } = userData;
+    const storedUserData = JSON.parse(localStorage.getItem('userData'));
+    const token = storedUserData?.jwt;
 
-    if (profileImageUrl) {
-      dataToSave.profileImageUrl = profileImageUrl;
-    }
-
-    UserService.updateUser(dataToSave)
+    UserService.updateUser(userData, profileImageFile, token)
       .then(() => {
-        notify("Changes saved successfully!", "success");
-        console.log('Guardando cambios', dataToSave);
+        notify("Cambios guardados correctamente!", "success");
       })
       .catch(error => {
-        notify("Error saving changes", "error");
+        notify("Error al guardar los cambios", "error");
         console.error(error);
       });
   };
 
   const handleLogout = () => {
     localStorage.removeItem('userData');
-    notify("Logged out successfully.", "info");
+    notify("Cierre de sesión exitoso.", "info");
     setIsLoggedIn(false);
   };
 
-  const handleProfileImageUrlChange = (e) => {
-    setProfileImageUrl(e.target.value);
-  };
-
   const responseGoogle = (response) => {
-    if (response && response.credential) {
+    if (response?.credential) {
       const googleToken = response.credential;
       const storedUserData = JSON.parse(localStorage.getItem('userData'));
-      const email = storedUserData ? storedUserData.email : null;
+      const email = storedUserData?.email;
 
       if (email) {
         UserService.synchronizeAccountGoogle(email, googleToken)
-          .then(() => {
-            notify('Sincronización exitosa con Google!', "success");
-          })
-          .catch(error => {
-            notify(error.response.data, "error");
-          });
+          .then(() => notify('Sincronización exitosa con Google!', "success"))
+          .catch(error => notify(error.response.data, "error"));
       } else {
-        notify('Error: No se pudo encontrar el email en el localStorage.', "error");
+        notify('Error: No se encontró el email en localStorage.', "error");
       }
     } else {
-      console.error('Error: No se pudo obtener el token de Google.');
-      notify('Error: No se pudo obtener el token de Google.', "error");
+      notify('Error: No se obtuvo el token de Google.', "error");
     }
   };
 
@@ -94,38 +78,12 @@ export default function Profile() {
 
   if (!isLoggedIn) {
     return (
-      <div
-        className="login-prompt"
-        style={{
-          padding: '30vh',
-          border: '1px solid #ccc',
-          borderRadius: '8px',
-          textAlign: 'center',
-          backgroundColor: '#f9f9f9',
-        }}
-      >
-        <h2
-          style={{
-            color: '#d9534f',
-            fontSize: '24px',
-            marginBottom: '10px',
-          }}
-        >
-          No has iniciado sesión
-        </h2>
-        <p
-          style={{
-            color: '#555',
-            fontSize: '16px',
-            marginBottom: '20px',
-          }}
-        >
-          Por favor, inicia sesión para acceder a tu perfil.
-        </p>
+      <div className="login-prompt" style={{ padding: '30vh', textAlign: 'center' }}>
+        <h2>No has iniciado sesión</h2>
+        <p>Por favor, inicia sesión para acceder a tu perfil.</p>
       </div>
     );
   }
-  
 
   if (!userData) return <div>Error al cargar los datos del perfil.</div>;
 
@@ -138,28 +96,32 @@ export default function Profile() {
           </div>
           <div className="user-info">
             <h2>{userData.firstName} {userData.lastName}</h2>
-            <p className="user-email">{userData.email}</p>
+            <p>{userData.email}</p>
           </div>
         </div>
+
         <div className="profile-content">
           <h3>Información Personal</h3>
           <button onClick={() => setIsEditing(!isEditing)} className="edit-button">
             {isEditing ? 'Cancelar' : 'Editar'}
           </button>
+
           <div className="info-grid">
-            <InfoItem label="Nombre" value={userData.firstName || 'No especificado'} isEditing={isEditing} name="firstName" onChange={handleChange} />
-            <InfoItem label="Apellido" value={userData.lastName || 'No especificado'} isEditing={isEditing} name="lastName" onChange={handleChange} />
-            <InfoItem label="Email" value={userData.email || 'No especificado'} isEditing={false} />
-            <InfoItem label="Miembro desde" value={new Date(userData.accountCreated).toLocaleDateString()} />
+            <InfoItem label="Nombre" value={userData.firstName} isEditing={isEditing} name="firstName" onChange={handleChange} />
+            <InfoItem label="Apellido" value={userData.lastName} isEditing={isEditing} name="lastName" onChange={handleChange} />
+            <InfoItem label="Email" value={userData.email} isEditing={false} />
+            <InfoItem label="Miembro desde" value={new Date(userData.accountCreated).toLocaleDateString()} isEditing={false} />
           </div>
+
           {isEditing && (
             <>
-              <div className="avatar-url-container">
-                <label htmlFor="">Actualiza Tu Imagen</label>
+              <div className="avatar-upload-container">
+                <label htmlFor="avatarFile">Sube una nueva imagen</label>
                 <input 
-                  type="text" 
-                  onChange={handleProfileImageUrlChange} 
-                  placeholder="URL de la nueva imagen" 
+                  type="file" 
+                  id="avatarFile"
+                  accept="image/*"
+                  onChange={(e) => setProfileImageFile(e.target.files[0])}
                   className="avatar-url-input" 
                 />
               </div>
@@ -175,9 +137,11 @@ export default function Profile() {
               />
             </GoogleOAuthProvider>
           )}
+
           <button onClick={handleLogout} className="logout-button">Cerrar Sesión</button>
         </div>
       </div>
+
       <ToastNotification />
     </div>
   );

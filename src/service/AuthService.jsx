@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../config/globals';
-const API_URL_AUTH = API_URL+"/auth"+'/api/v1/auth';
+const API_URL_AUTH =`${API_URL}/auth/api/v1/auth`;
 axios.defaults.withCredentials = true;
 class AuthService{
     login(auth){
