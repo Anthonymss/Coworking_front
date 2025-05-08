@@ -13,6 +13,10 @@ import ReservationPage from './components/reservation/ReservationPage';
 import SpacesSection from './components/spaces/SpacesSection';
 import MembershipDetail from './components/memberships/membershipDetail/MembershipDetail';
 import InvoiceMembership from './components/memberships/invoiceMembership/InvoiceMembership';
+import ProtectedRoute from './config/ProtectedRoute';
+import AdminDashboard from './components/admin/dashbord/AdminDashboard';
+import Unauthorized from './components/unauthorized/Unauthorized';
+import { RoleEnum } from './utils/role.enum';
 import "./styles/appError.css";
 import './styles/globals.css';
 const NotFound = () => (
@@ -41,6 +45,15 @@ function App() {
           <Route path="/membership/:membershipId" element={<MembershipDetail />} />
           <Route path="/invoice" element={<InvoicePage />} />
           <Route path="/invoiceMembership" element={<InvoiceMembership />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute allowedRoles={[RoleEnum.ADMIN]}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

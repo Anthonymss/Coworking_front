@@ -1,16 +1,14 @@
 import axios from 'axios';
 import { API_URL } from '../config/globals';
 const API_URL_SPACE= API_URL+"/spaces"+'/api/v1/spaces';
-axios.defaults.withCredentials = true;
 class SpacesService {
-    getSpacesForFilter(query) {
-        console.log(query);
-        return axios.get(`${API_URL_SPACE}${query}`);
+    getSpacesForFilter(params) {
+        return axios.get(API_URL_SPACE, { params });
     }
     getSpaceById(spaceId) {
         return axios.get(`${API_URL_SPACE}/${spaceId}`);
     }
-    getFilterSpace(){
+    getFilterSpace() {
         return axios.get(`${API_URL_SPACE}/filters`);
     }
 }

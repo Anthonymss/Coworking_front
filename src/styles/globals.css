@@ -1,5 +1,7 @@
-@import 'variables.css';
-
+.App{
+  position: relative;
+  top: 0.7rem;
+}
 * {
   box-sizing: border-box;
   margin: 0;

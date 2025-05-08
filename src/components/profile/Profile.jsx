@@ -13,22 +13,13 @@ export default function Profile() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
-    const storedUserData = JSON.parse(localStorage.getItem('userData'));
-
-    if (storedUserData?.jwt) {
-      UserService.infoAccount(storedUserData.email, storedUserData.jwt)
-        .then(response => {
-          setUserData(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching user data:', error);
-          setIsLoggedIn(false);
-        })
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
-      setIsLoggedIn(false);
-    }
+    UserService.infoAccount()
+      .then(response => setUserData(response.data))
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+        setIsLoggedIn(false);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const handleChange = (e) => {
@@ -37,13 +28,8 @@ export default function Profile() {
   };
 
   const handleSave = () => {
-    const storedUserData = JSON.parse(localStorage.getItem('userData'));
-    const token = storedUserData?.jwt;
-
-    UserService.updateUser(userData, profileImageFile, token)
-      .then(() => {
-        notify("Cambios guardados correctamente!", "success");
-      })
+    UserService.updateUser(userData, profileImageFile)
+      .then(() => notify("Cambios guardados correctamente!", "success"))
       .catch(error => {
         notify("Error al guardar los cambios", "error");
         console.error(error);
@@ -58,17 +44,9 @@ export default function Profile() {
 
   const responseGoogle = (response) => {
     if (response?.credential) {
-      const googleToken = response.credential;
-      const storedUserData = JSON.parse(localStorage.getItem('userData'));
-      const email = storedUserData?.email;
-
-      if (email) {
-        UserService.synchronizeAccountGoogle(email, googleToken)
-          .then(() => notify('Sincronización exitosa con Google!', "success"))
-          .catch(error => notify(error.response.data, "error"));
-      } else {
-        notify('Error: No se encontró el email en localStorage.', "error");
-      }
+      UserService.synchronizeAccountGoogle(response.credential)
+        .then(() => notify('Sincronización exitosa con Google!', "success"))
+        .catch(error => notify(error.response?.data || "Error al sincronizar", "error"));
     } else {
       notify('Error: No se obtuvo el token de Google.', "error");
     }

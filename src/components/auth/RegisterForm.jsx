@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
 import { GOOGLE_CLIENT_ID } from '../../config/globals';
-import AuthService from '../../service/AuthService';
+import AuthService from '../../service/Auth/AuthService';
 import { notify, ToastNotification } from '../notification/ToastNotification';
-
+import { storeUserAndReload } from '../../service/Auth/AuthUtils';
 export default function RegisterForm() {    
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -21,24 +21,14 @@ export default function RegisterForm() {
 
     const handleGoogleRegister = async (response) => {
         const token = response.credential;
-
-
         try {
             const res = await AuthService.registerForGoogle({ token });
-            setUserInfo(res.data);
-            const userData = {
-                email: res.data.email,
-                firstName: res.data.firstName,
-                lastName: res.data.lastName,
-                id: res.data.id,
-                jwt: res.data.jwt
-            };
-            localStorage.setItem('userData', JSON.stringify(userData));
-            notify('Usuario registrado exitosamente', 'success');
-            navigate('/');
-            window.location.reload();
+            if (res.data && res.data.accessToken) {
+                storeUserAndReload(res.data);
+                window.location.reload();
+            }
         } catch (error) {
-            notify(error.response.data, 'error'); 
+            notify(error.response?.data || 'Error al registrarse con Google', 'error');
         }
     };
 
@@ -47,37 +37,21 @@ export default function RegisterForm() {
             notify('Por favor, complete todos los campos', 'error');
             return;
         }
-    
         if (!validateEmail(email)) {
-            notify('Por favor, ingrese un correo electrónico válido', 'error');
+            notify('Correo electrónico inválido', 'error');
             return;
         }
-        if (password.length < 6) { 
-            notify('La contraseña debe tener al menos 6 caracteres', 'error');
+        if (password.length < 6) {
+            notify('Contraseña muy corta', 'error');
             return;
         }
-    
-        const user = {
-            firstName,
-            lastName,
-            email,
-            password,
-        };
-    
         try {
-            const res = await AuthService.register(user);
-            setUserInfo(res.data);
-            const userData = {
-                email: res.data.email,
-                firstName: res.data.firstName,
-                lastName: res.data.lastName,
-                id: res.data.id,
-                jwt: res.data.jwt,
-            };
-            localStorage.setItem('userData', JSON.stringify(userData));
-            notify('Usuario registrado exitosamente', 'success');
-        } catch (error) {            
-            notify(error.response.data, 'error');
+            const res = await AuthService.register({ firstName, lastName, email, password });
+            if (res.data && res.data.accessToken) {
+                storeUserAndReload(res.data);
+            }
+        } catch (error) {
+            notify(error.response?.data || 'Error en el registro', 'error');
         }
     };
     

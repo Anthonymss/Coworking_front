@@ -12,6 +12,10 @@ export default function SpacesSection() {
     const [type, setType] = useState('');
     const [selectedSpace, setSelectedSpace] = useState(null);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const [totalItems, setTotalItems] = useState(0);
+
     useEffect(() => {
         fetchFilters();
         listSpaces();
@@ -23,30 +27,48 @@ export default function SpacesSection() {
             .catch(error => console.error('Error fetching filters:', error));
     };
 
-    const listSpaces = (query = '') => {
-        SpacesService.getSpacesForFilter(query)
-            .then(response => setSpaces(response.data))
+    const listSpaces = (filtersObj = {}, page = 1, size = 5) => {
+        const params = { ...filtersObj, page, size };
+
+        SpacesService.getSpacesForFilter(params)
+            .then(response => {
+                setSpaces(response.data.spaces || []);
+                setTotalPages(response.data.totalPages || 0);
+                setTotalItems(response.data.totalItems || 0);
+            })
             .catch(error => console.error('Error fetching spaces:', error));
     };
 
     const filterSpaces = () => {
-        const params = [];
-        if (city) params.push(`city=${city}`);
-        if (district) params.push(`district=${district}`);
-        if (type) params.push(`spaceType=${type}`);
-        const query = params.length ? `?${params.join('&')}` : '';
-        listSpaces(query);
+        const filtersObj = {};
+        if (city) filtersObj.city = city;
+        if (district) filtersObj.district = district;
+        if (type) filtersObj.spaceType = type;
+
+        setCurrentPage(1);
+        listSpaces(filtersObj, 1);
     };
 
     const resetFilters = () => {
         setCity('');
         setDistrict('');
         setType('');
-        listSpaces();
+        setCurrentPage(1);
+        listSpaces({}, 1);
     };
 
     const openModal = (space) => setSelectedSpace(space);
     const closeModal = () => setSelectedSpace(null);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+        const filtersObj = {};
+        if (city) filtersObj.city = city;
+        if (district) filtersObj.district = district;
+        if (type) filtersObj.spaceType = type;
+
+        listSpaces(filtersObj, page);
+    };
 
     return (
         <div className='container-spaces'>
@@ -88,6 +110,7 @@ export default function SpacesSection() {
                     <button className="filter-button" onClick={filterSpaces}>Aplicar Filtro</button>
                     <button className="reset-button" onClick={resetFilters}>Restablecer</button>
                 </div>
+
                 <div className="spaces-list">
                     {spaces.length > 0 ? (
                         spaces.map(space => (
@@ -97,7 +120,24 @@ export default function SpacesSection() {
                         <p className="no-spaces-message">No se encontraron espacios. Intenta ajustar los filtros.</p>
                     )}
                 </div>
+
+                <div className="pagination">
+                    <button 
+                        onClick={() => handlePageChange(currentPage - 1)} 
+                        disabled={currentPage === 1}
+                    >
+                        Anterior
+                    </button>
+                    <span>{currentPage} de {totalPages}</span>
+                    <button 
+                        onClick={() => handlePageChange(currentPage + 1)} 
+                        disabled={currentPage === totalPages}
+                    >
+                        Siguiente
+                    </button>
+                </div>
             </div>
+
             {selectedSpace && <SpaceDetailModal space={selectedSpace} onClose={closeModal} />}
         </div>
     );
