@@ -1,5 +1,5 @@
 const URL_LOCAL="http://localhost:8080"
-const URL_Production="https://api-gateway-iw9w.onrender.com"
+const URL_Production="http://18.222.54.88:8080"
 const API_URL = URL_LOCAL;
 const GOOGLE_CLIENT_ID = '808733237190-tiphulsegraiodghl91o39lqa1cf22pp.apps.googleusercontent.com';
 
