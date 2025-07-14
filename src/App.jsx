@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import AboutSection from './components/about/AboutSection';
 import ContactForm from './components/contact/ContactForm';
-import Home from './components/home/Hero';
+import HomePage from './components/home/HomePage';
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
 import MembershipsSection from './components/memberships/MembershipsSection';
@@ -35,7 +35,7 @@ function App() {
       <div className="App">
         <ToastNotification />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/spaces" element={<SpacesSection />} /> 
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/profile" element={<Profile />} />

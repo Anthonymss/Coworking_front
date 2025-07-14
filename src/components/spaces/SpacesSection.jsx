@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import SpacesService from '../../service/SpacesService';
 import SpaceCard from './spaceCard/SpaceCard';
 import SpaceDetailModal from './spaceDetail/SpaceDetailModal';
+import { faAngleDoubleLeft, faAngleDoubleRight, faAngleLeft, faAngleRight, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './SpacesSection.css';
 
 export default function SpacesSection() {
@@ -27,7 +29,7 @@ export default function SpacesSection() {
             .catch(error => console.error('Error fetching filters:', error));
     };
 
-    const listSpaces = (filtersObj = {}, page = 1, size = 5) => {
+    const listSpaces = (filtersObj = {}, page = 1, size = 6) => {
         const params = { ...filtersObj, page, size };
 
         SpacesService.getSpacesForFilter(params)
@@ -70,6 +72,67 @@ export default function SpacesSection() {
         listSpaces(filtersObj, page);
     };
 
+    const renderPagination = () => {
+        const pages = [];
+        const maxVisiblePages = 5;
+        const halfMaxVisible = Math.floor(maxVisiblePages / 2);
+
+        let startPage = Math.max(1, currentPage - halfMaxVisible);
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage < maxVisiblePages - 1) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+
+        if (startPage > 1) {
+            pages.push(
+                <button key="first" className="nav-button" onClick={() => handlePageChange(1)}>
+                    <FontAwesomeIcon icon={faAngleDoubleLeft} /> <span>Primero</span>
+                </button>
+            );
+            if (startPage > 2) {
+                pages.push(
+                    <button key="prev" className="nav-button" onClick={() => handlePageChange(currentPage - 1)}>
+                        <FontAwesomeIcon icon={faAngleLeft} /> <span>Anterior</span>
+                    </button>
+                );
+            }
+        }
+
+        for (let page = startPage; page <= endPage; page++) {
+            pages.push(
+                <button key={page} className={`page-button ${page === currentPage ? 'active' : ''}`} onClick={() => handlePageChange(page)}>
+                    {page}
+                </button>
+            );
+        }
+
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                pages.push(
+                    <button key="next" className="nav-button" onClick={() => handlePageChange(currentPage + 1)}>
+                        <FontAwesomeIcon icon={faAngleRight} /> <span>Siguiente</span>
+                    </button>
+                );
+            }
+            pages.push(
+                <button key="last" className="nav-button" onClick={() => handlePageChange(totalPages)}>
+                    <FontAwesomeIcon icon={faAngleDoubleRight} /> <span>Último</span>
+                </button>
+            );
+        }
+
+        return (
+            <div className="pagination">
+                {pages}
+                <div className="pagination-info">
+                    <FontAwesomeIcon icon={faInfoCircle} className="info-icon" />
+                    <span>Página {currentPage} de {totalPages} ({totalItems} espacios)</span>
+                </div>
+            </div>
+        );
+    };
+
     return (
         <div className='container-spaces'>
             <h1 className='space-title'>Encuentra Tu Espacio Ideal</h1>
@@ -81,9 +144,7 @@ export default function SpacesSection() {
                     <select id="city" value={city} onChange={e => setCity(e.target.value)}>
                         <option value="">Selecciona una Ciudad</option>
                         {filters.city.map((cityOption, index) => (
-                            <option key={index} value={cityOption}>
-                                {cityOption}
-                            </option>
+                            <option key={index} value={cityOption}>{cityOption}</option>
                         ))}
                     </select>
 
@@ -91,50 +152,40 @@ export default function SpacesSection() {
                     <select id="district" value={district} onChange={e => setDistrict(e.target.value)}>
                         <option value="">Selecciona un Distrito</option>
                         {filters.district.map((districtOption, index) => (
-                            <option key={index} value={districtOption}>
-                                {districtOption}
-                            </option>
+                            <option key={index} value={districtOption}>{districtOption}</option>
                         ))}
                     </select>
 
                     <label htmlFor="type">Tipo de Espacio</label>
                     <select id="type" value={type} onChange={e => setType(e.target.value)}>
-                        <option value="">Selecciona un Tipo de Espacio</option>
+                        <option value="">Selecciona un Tipo</option>
                         {filters.type.map((typeOption, index) => (
-                            <option key={index} value={typeOption}>
-                                {typeOption.replaceAll('_', ' ')}
-                            </option>
+                            <option key={index} value={typeOption}>{typeOption}</option>
                         ))}
                     </select>
 
-                    <button className="filter-button" onClick={filterSpaces}>Aplicar Filtro</button>
-                    <button className="reset-button" onClick={resetFilters}>Restablecer</button>
+                    <button className="filter-button" onClick={filterSpaces}>Filtrar</button>
+                    <button className="reset-button" onClick={resetFilters}>Limpiar Filtros</button>
                 </div>
 
-                <div className="spaces-list">
-                    {spaces.length > 0 ? (
-                        spaces.map(space => (
-                            <SpaceCard key={space.id} space={space} onClick={() => openModal(space)} />
-                        ))
-                    ) : (
-                        <p className="no-spaces-message">No se encontraron espacios. Intenta ajustar los filtros.</p>
+                <div className="spaces-content">
+                    <div className="spaces-list">
+                        {spaces.length > 0 ? (
+                            spaces.map((space) => (
+                                <SpaceCard key={space.id} space={space} onOpenModal={openModal} />
+                            ))
+                        ) : (
+                            <div className="no-spaces-message">
+                                No se encontraron espacios que coincidan con los filtros seleccionados.
+                            </div>
+                        )}
+                    </div>
+
+                    {spaces.length > 0 && (
+                        <div className="pagination-wrapper">
+                            {renderPagination()}
+                        </div>
                     )}
-                </div>
-
-                <div className="pagination">
-                    <button 
-                        onClick={() => handlePageChange(currentPage - 1)} 
-                        disabled={currentPage === 1}
-                    >
-                        Anterior
-                    </button>
-                    <span>{currentPage} de {totalPages}</span>
-                    <button 
-                        onClick={() => handlePageChange(currentPage + 1)} 
-                        disabled={currentPage === totalPages}
-                    >
-                        Siguiente
-                    </button>
                 </div>
             </div>
 

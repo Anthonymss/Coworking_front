@@ -25,6 +25,19 @@ export default function Header() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isDropdownOpen && !event.target.closest('.dropdown')) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
   const handleLogout = () => {
     localStorage.removeItem('userData');
     setIsUserLoggedIn(false);
@@ -45,22 +58,24 @@ export default function Header() {
           <a href="/contact" className="nav-item">Contáctanos</a>
         </nav>
         <div className="header-actions">
-          <div className="user-menu">
+          <div className="user-menu dropdown">
             {isUserLoggedIn ? (
-              <div className="dropdown">
-                <button className="btn-icon" onClick={toggleDropdown}>
-                  <FontAwesomeIcon className="fa-2x" icon={faUserCircle} />
+              <>
+                <button className="user-btn" onClick={toggleDropdown}>
+                  <FontAwesomeIcon icon={faUserCircle} className="fa-2x" />
                 </button>
                 <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
-                  <a href="/profile" className="dropdown-item dropdown-item1">Ver Perfil</a>
+                  <a href="/profile" className="dropdown-item">
+                    <FontAwesomeIcon icon={faUserCircle} /> Ver Perfil
+                  </a>
                   <button onClick={handleLogout} className="dropdown-item">
-                    <FontAwesomeIcon className="fa-2x" icon={faSignOutAlt} /> Salir
+                    <FontAwesomeIcon icon={faSignOutAlt} /> Salir
                   </button>
                 </div>
-              </div>
+              </>
             ) : (
-              <button className="btn-icon" onClick={toggleModal}>
-                <FontAwesomeIcon className="fa-1x" icon={faUser} /> Iniciar sesión
+              <button className="auth-btn" onClick={toggleModal}>
+                <FontAwesomeIcon icon={faUser} className="fa-1x" /> Iniciar sesión
               </button>
             )}
           </div>
@@ -69,7 +84,9 @@ export default function Header() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            <FontAwesomeIcon icon={faBars} />
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
         </div>
       </div>

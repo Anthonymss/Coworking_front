@@ -1,90 +1,128 @@
 .membership-card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    padding: 30px; /* Padding consistente */
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem;
     width: 100%;
-    max-width: 400px; /* Ancho máximo */
-    margin: 1px auto;
+    max-width: 350px;
+    margin: 0 auto;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    font-size: 100%;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.membership-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+}
+
+.membership-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent, rgba(52, 152, 219, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.membership-card:hover::before {
+    opacity: 1;
 }
 
 .membership-title {
-    font-size: 1.5em; 
-    font-weight: 700; /* Más negrita para el título */
-    color: #2c3e50; 
-    margin-bottom: 15px; 
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .membership-card hr {
     border: none;
-    border-top: 1px solid #ecf0f1; 
-    margin: 15px 0; 
+    border-top: 1px solid rgba(52, 152, 219, 0.1);
+    margin: 1.5rem 0;
 }
 
 .membership-features,
-.membership-details,
-.membership-details ul,
-.membership-features ul,
-.membership-features li,
-.membership-details li {
-    list-style-type: none;
+.membership-details {
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .membership-features li,
 .membership-details li {
-    background-color: #e7f3fe; 
-    padding: 7px; /* Un poco más de padding */
-    margin: 5px 0;
-    border-radius: 5px;
-    font-size: 0.95em; /* Un tamaño de fuente ligeramente mayor */
-    color: #302c2c; 
-    width: 100%; /* Sin cálculo, ya que está controlado por el box-sizing */
-    box-sizing: border-box; 
-    transition: background-color 0.3s, transform 0.3s; /* Transiciones para el hover */
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    padding: 1rem;
+    margin: 0.75rem 0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.membership-features li::before,
+.membership-details li::before {
+    content: '✓';
+    color: #27ae60;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
 .membership-features li:hover,
 .membership-details li:hover {
-    background-color: #d0e9ff; 
-    transform: scale(1.02);
+    transform: translateX(5px);
+    background: linear-gradient(135deg, #f5f7fa, #ffffff);
 }
 
 .btn-primary-m {
-    background-color: #3498db; 
+    background: linear-gradient(135deg, #3498db, #2980b9);
     color: #fff;
-    padding: 14px 20px; /* Aumento del padding para mayor área clickeable */
+    padding: 1rem 2rem;
     border: none;
-    border-radius: 5px;
-    font-size: 1em;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s; 
-    width: 100%; 
-    margin-top: 15px;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .btn-primary-m:hover {
-    background-color: #2980b9; 
-    transform: scale(1.05); /* Crecimiento al pasar el mouse */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(52, 152, 219, 0.3);
 }
 
-/* Nuevo contenedor para alinear el precio y el botón */
 .price-button-container {
     display: flex;
-    flex-direction: column; /* Alinea el precio y el botón en una columna */
-    align-items: center; /* Centra los elementos horizontalmente */
-    gap: 10px; /* Espacio entre el precio y el botón */
-    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 .pPrice {
-    font-size: 1.5em; /* Tamaño ajustado */
-    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
     font-weight: 700;
-    margin: 0; /* Asegúrate de que no haya margen adicional */
     color: #2c3e50;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.pPrice::after {
+    content: '/mes';
+    font-size: 0.8rem;
+    color: #666;
+    display: block;
+    margin-top: 0.5rem;
 }

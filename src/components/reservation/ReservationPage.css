@@ -1,103 +1,128 @@
 .reservation-page {
-    padding: 40px;
-    font-family: 'Roboto', sans-serif;
+    padding: 2rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     color: #333;
-    background-color: #f5f7fa;
-    top: 4rem;
-    margin-bottom: 4rem;
+    background-color: #f8f9fa;
     position: relative;
-  }
-  
-  .reservation-error-message {
-    color: #d9534f;
+    top: 2rem;
+}
+
+.reservation-error-message {
+    color: #dc3545;
     text-align: center;
     font-weight: 500;
-    margin-bottom: 20px;
-  }
-  
-  .reservation-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid #f8d7da;
+}
+
+.reservation-card {
     display: flex;
     max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
     overflow: hidden;
-  }
-  
-  .reservation-space-details {
+}
+
+.reservation-space-details {
     width: 45%;
-    padding: 20px;
-    background: #f9f9fb;
+    padding: 2rem;
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .reservation-image-overlay {
+}
+
+.reservation-image-overlay {
     overflow: hidden;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
     width: 100%;
-  }
-  
-  .reservation-space-image {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-space-image {
     width: 100%;
     height: auto;
-    border-radius: 8px;
-  }
-  
-  .reservation-space-title {
-    font-size: 22px;
-    font-weight: bold;
-    color: #34495e;
-    margin-top: 12px;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.reservation-space-image:hover {
+    transform: scale(1.02);
+}
+
+.reservation-space-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #ffd700;
+    margin-top: 1rem;
     text-align: center;
-  }
-  
-  .reservation-info-section p {
-    font-size: 14px;
-    color: #555;
-    line-height: 1.5;
-    margin: 6px 0;
-  }
-  
-  .reservation-equipment-section {
-    margin-top: 15px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-info-section p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin: 0.75rem 0;
+    text-align: center;
+}
+
+.reservation-equipment-section {
+    margin-top: 1.5rem;
     width: 100%;
-  }
-  
-  .reservation-equipment-section h3 {
-    font-size: 15px;
-    color: #333;
+}
+
+.reservation-equipment-section h3 {
+    font-size: 1.1rem;
+    color: #fff;
     font-weight: 600;
-    margin-bottom: 8px;
-  }
-  
-  .reservation-equipment-list {
-    max-height: 120px;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.reservation-equipment-list {
+    max-height: 150px;
     overflow-y: auto;
-    background-color: #ffffff;
-    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.75rem;
     border-radius: 8px;
-    border: 1px solid #e0e0e0;
-  }
-  
-  .reservation-equipment-item {
-    font-size: 13px;
-    color: #444;
-    padding: 6px;
-    border-bottom: 1px solid #f0f0f0;
-  }
-  
-  .reservation-form {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.reservation-equipment-item {
+    font-size: 0.95rem;
+    color: #fff;
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reservation-form {
     width: 55%;
-    padding: 30px;
-    background-color: #ffffff;
-  }
-  
-  .reservation-form h3 {
-    font-size: 18px;
+    padding: 2rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.reservation-form h3 {
+    font-size: 1.5rem;
     font-weight: 600;
     color: #333;
-    margin-bottom: 20px;
-  }
+    margin-bottom: 1rem;
+    text-align: center;
+}
   
   .reservation-form-group {
     width: 100%;

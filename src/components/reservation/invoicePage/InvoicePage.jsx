@@ -95,16 +95,6 @@ export default function InvoicePage() {
     services,
   } = invoiceData;
 
-  const [startTime, endTime] = durationRange.split(' - ');
-  const formattedStartTime = new Date(startTime).toLocaleString('es-ES', {
-    dateStyle: 'short',
-    timeStyle: 'short',
-  });
-  const formattedEndTime = new Date(endTime).toLocaleString('es-ES', {
-    timeStyle: 'short',
-  });
-  const formattedDuration = `${formattedStartTime} - ${formattedEndTime}`;
-
   const SpaceNamesDetail = ['Sitio:', 'Dirección:', 'Nombre:'];
   const formattedSpaceDetails = spaceDetails
     .split(';')
@@ -122,7 +112,7 @@ export default function InvoicePage() {
 
         <View style={styles.section}>
           <Text style={styles.heading}>Fecha de Reserva:</Text>
-          <Text style={styles.text}>{new Date(reservationDate).toLocaleString('es-ES')}</Text>
+          <Text style={styles.text}>{reservationDate}</Text>
         </View>
 
         <View style={styles.section}>
@@ -136,7 +126,7 @@ export default function InvoicePage() {
 
         <View style={styles.section}>
           <Text style={styles.heading}>Duración:</Text>
-          <Text style={styles.text}>{formattedDuration}</Text>
+          <Text style={styles.text}>{durationRange}</Text>
         </View>
 
         <View style={styles.section}>
@@ -206,7 +196,7 @@ export default function InvoicePage() {
         </p>
         <p>
           <strong>Fecha de Reserva:</strong>{' '}
-          {new Date(reservationDate).toLocaleString('es-ES')}
+          {reservationDate}
         </p>
         <p>
           <strong>Espacio Reservado:</strong>
@@ -217,7 +207,7 @@ export default function InvoicePage() {
           </p>
         ))}
         <p>
-          <strong>Duración:</strong> {formattedDuration}
+          <strong>Duración:</strong> {durationRange}
         </p>
         <p>
           <strong>Método de Pago:</strong> {paymentMethod}

@@ -1,85 +1,168 @@
 .contact-section {
   text-align: center;
-  padding: 3rem 1.5rem;
-  background-color: #f9f9f9;
+  padding: 4rem 1.5rem;
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  top: 4rem;
-  height: 40rem;
-  margin-bottom: 4rem;
 }
 
 .contact-container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
+  padding: 2rem;
+}
+
+.contact-content {
+  margin-bottom: 3rem;
 }
 
 .contact-section-title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #333;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-weight: 800;
+  position: relative;
+}
+
+.contact-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
 }
 
 .contact-description {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: #666;
-  line-height: 1.5;
-}
-
-.contact-info {
-  font-size: 1.2rem;
-  margin: 0.5rem 0;
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
   color: #555;
+  line-height: 1.8;
 }
 
-.contact-info a {
-  color: #007bff;
+.contact-info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.contact-info-item:hover {
+  transform: translateY(-5px);
+  background: rgba(52, 152, 219, 0.05);
+}
+
+.contact-icon {
+  font-size: 2.5rem;
+  color: #3498db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(52, 152, 219, 0) 100%);
+  transition: all 0.3s ease;
+}
+
+.contact-info-item:hover .contact-icon {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.2) 0%, rgba(52, 152, 219, 0) 100%);
+}
+
+.contact-info-content strong {
+  display: block;
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.contact-info-content a {
+  font-size: 1.2rem;
+  color: #3498db;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.contact-info a:hover {
-  color: #0056b3;
+.contact-info-content a:hover {
+  color: #2980b9;
+}
+
+.contact-info-content p {
+  font-size: 1.2rem;
+  color: #555;
+  margin: 0;
 }
 
 .contact-details {
-  font-size: 1rem;
-  margin-top: 1.5rem;
-  color: #444;
-  line-height: 1.6;
+  color: #666;
+  line-height: 1.8;
+}
+
+.contact-details p {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
 }
 
 .contact-cta-buttons {
   display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .contact-btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
   color: #fff;
   text-decoration: none;
-  border-radius: 0.25rem;
-  transition: background-color 0.3s ease;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  background: transparent;
+  border: 2px solid #3498db;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.contact-btn:hover::before {
+  transform: translateX(0);
 }
 
 .contact-btn-primary {
-  background-color: #007bff;
-}
-
-.contact-btn-primary:hover {
-  background-color: #0056b3;
+  color: #3498db;
 }
 
 .contact-btn-secondary {
-  background-color: #6c757d;
+  color: #6c757d;
+  border-color: #6c757d;
 }
 
-.contact-btn-secondary:hover {
-  background-color: #495057;
+.contact-btn-secondary:hover::before {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
 }

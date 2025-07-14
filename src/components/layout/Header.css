@@ -1,21 +1,22 @@
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2c3e50;
-  --accent-color: #e74c3c;
-  --background-color: #ecf0f1;
-  --text-color: #34495e;
-  --light-text-color: #bdc3c7;
+  --primary-color: #ff6b6b;
+  --secondary-color: #ff8e53;
+  --accent-color: #ffd700;
+  --text-color: #1f2937;
+  --light-text-color: #4b5563;
 }
 
 .header {
-  background-color: var(--background-color);
-  border-bottom: 1px solid var(--light-text-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1000;
+  transition: all 0.3s ease;
 }
 
 .header-container {
@@ -24,75 +25,163 @@
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 1rem;
 }
 
 .logo {
   display: flex;
   align-items: center;
   text-decoration: none;
+  gap: 0.75rem;
 }
 
 .logo-icon {
-  width: 40px;
-  height: 40px;
-  margin-right: 8px;
+  width: 24px;
+  height: 24px;
   color: var(--primary-color);
 }
 
 .logo-text {
   font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--secondary-color);
+  font-weight: 600;
+  color: var(--text-color);
+  letter-spacing: -0.5px;
 }
 
 .header-nav {
   display: flex;
-  align-items: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  gap: 2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .nav-item {
-  margin: 0 16px;
-  text-decoration: none;
   color: var(--text-color);
-  font-size: 1rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.nav-item:hover {
-  color: var(--primary-color);
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+  width: 100%;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-}
-
-.btn-icon {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  margin-left: 8px;
-  transition: background-color 0.3s ease;
-  color: var(--text-color);
-}
-
-.btn-icon:hover {
-  background-color: var(--light-text-color);
-  border-radius: 4px;
-  color: var(--primary-color);
+  gap: 1.5rem;
 }
 
 .user-menu {
   position: relative;
 }
 
+.user-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
 
+.user-btn:hover {
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.user-btn svg {
+  width: 32px;
+  height: 32px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1001;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  width: 100%;
+  background-color: rgba(218, 209, 209, 0.767);
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.4); 
+  color: #ffffff; 
+}
+
+.dropdown-item svg {
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+}
+
+.auth-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.auth-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.auth-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+}
 
 .menu-toggle {
   display: none;
@@ -103,15 +192,16 @@
   background: none;
   border: none;
   cursor: pointer;
+  padding: 8px;
 }
 
 .menu-toggle span {
   display: block;
-  height: 3px;
+  height: 2px;
   width: 100%;
   background-color: var(--text-color);
   border-radius: 3px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .menu-toggle:hover span {
@@ -119,83 +209,30 @@
 }
 
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
   .header-nav {
     display: none;
-    flex-direction: column;
     position: absolute;
     top: 60px;
     left: 0;
     right: 0;
-    background-color: var(--background-color);
-    border-top: 1px solid var(--light-text-color);
+    background: rgba(255, 255, 255, 0.98);
+    padding: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1000;
   }
 
   .header-nav.is-open {
     display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .nav-item {
     margin: 16px;
     font-size: 1.2rem;
   }
-
-  .menu-toggle {
-    display: flex;
-  }
-}
-.dropdown {
-  position: relative;
-  
-  }
-
-.dropdown-menu {
-  position: absolute;
-  top: 30px; 
-  right: -5ch; 
-  background-color: rgba(231, 231, 231, 0.767);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
-  width: 120px; 
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  opacity: 0; 
-  transform: translateY(10px);
-  visibility: hidden; 
-  transition: opacity 0.3s ease, transform 0.3s ease; 
-  border-radius: 5% !important;
-  
-}
-
-.dropdown-menu.show {
-  opacity: 1; 
-  transform: translateY(0); 
-  visibility: visible; 
-  border-radius: 5% !important;
-
-}
-
-.dropdown-item {
-  padding: 12px 16px; 
-  display: flex;
-  align-items: center;
-  justify-content: center; 
-  background-color: rgba(218, 209, 209, 0.767);
-  text-decoration: none; 
-  cursor: pointer; 
-  border: none;
-  transition: background-color 0.3s ease, color 0.3s ease; 
-  border-radius: 5% !important;
-
-}
-
-.dropdown-item:hover {
-  background-color: rgba(255, 255, 255, 0.4); 
-  color: #ffffff; 
-}
-
-.dropdown-item svg {
-  margin-right: 8px; 
-}
-.dropdown-item1{
-  text-decoration: none;
 }

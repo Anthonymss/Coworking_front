@@ -1,25 +1,36 @@
 import React from 'react';
 import './SpaceCard.css';
 
-export default function SpaceCard({ space, onClick }) {
-  const convertText = (text) => {
-    return text.replace(/_/g, " ");
-  };
+export default function SpaceCard({ space, onOpenModal }) {
+  const convertText = (text) => text.replace(/_/g, " ");
 
   return (
-    <div className="space-card" onClick={onClick}>
-      <div className='space-type-label'>{convertText(space.spaceType)}</div>
+    <div className="space-card">
+      <div className="space-type-label">
+        <div className="type-label-content">
+          {convertText(space.spaceType)}
+        </div>
+      </div>
       <div className="image-container">
         <img src={space.urlImage} alt={space.name} />
       </div>
       <div className="card-content">
         <h3 className="space-name">{space.name}</h3>
-        <p className="space-capacity">Capacidad: {space.capacity}</p>
-        <span className="price">S/{space.pricePerHour}/hora</span>
-        <p className="space-location">{space.siteName}</p>
-        <div className="space-click">
-          <i className="fas fa-eye"></i>
-          <span className="click-text">click aquí para ver más detalles</span>
+        <p className="space-capacidad">
+          <i className="fas fa-users"></i>
+          Capacidad: {space.capacity}
+        </p>
+        <div className="price-container">
+          <span className="price">S/{space.pricePerHour}</span>
+          <span className="price-unit">/hora</span>
+        </div>
+        <p className="space-location">
+          <i className="fas fa-map-marker-alt"></i>
+          {space.siteName}
+        </p>
+        <div className="space-click" onClick={() => onOpenModal(space)}>
+          <i className="fas fa-info-circle"></i>
+          <span className="click-text">Detalles y Reserva</span>
         </div>
       </div>
     </div>

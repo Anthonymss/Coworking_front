@@ -5,7 +5,14 @@ import './MembershipCard.css';
 export default function MembershipCard({ id, name, description, price, duration, type, features }) {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  // Añadimos un console.log para verificar las props recibidas
+  React.useEffect(() => {
+    console.log('Props recibidas:', { id, name, description, price, duration, type, features });
+  }, [id, name, description, price, duration, type, features]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log('Click en Conoce más', id);
     navigate(`/membership/${id}`);
   }
 
@@ -15,7 +22,7 @@ export default function MembershipCard({ id, name, description, price, duration,
   });
 
   return (
-    <div className="membership-card">
+    <div className="membership-card" style={{ pointerEvents: 'none' }}>
       <h3 className="membership-title">{name}</h3>
       <hr />
       <ul className="membership-features">
@@ -34,7 +41,20 @@ export default function MembershipCard({ id, name, description, price, duration,
       <strong>Duración:</strong> {duration} días
       <div className="price-button-container">
         <p className="pPrice">${price}</p>
-        <button className="btn btn-primary-m" onClick={handleClick}>
+        <button 
+          className="btn-primary-m" 
+          onClick={(e) => {
+            e.stopPropagation();
+            console.log('Botón presionado', e);
+            handleClick(e);
+          }}
+          type="button"
+          style={{ 
+            cursor: 'pointer',
+            pointerEvents: 'all',
+            userSelect: 'none'
+          }}
+        >
           Conoce más
         </button>
       </div>
