@@ -1,4 +1,4 @@
-import { faBars, faCoffee, faSignOutAlt, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCoffee, faSignOutAlt, faUser, faUserCircle, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import AuthModal from '../auth/AuthModal';
@@ -67,6 +67,9 @@ export default function Header() {
                 <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
                   <a href="/profile" className="dropdown-item">
                     <FontAwesomeIcon icon={faUserCircle} /> Ver Perfil
+                  </a>
+                  <a href="/my-reservations" className="dropdown-item">
+                    <FontAwesomeIcon icon={faCalendar} /> Mis Reservas
                   </a>
                   <button onClick={handleLogout} className="dropdown-item">
                     <FontAwesomeIcon icon={faSignOutAlt} /> Salir

@@ -17,6 +17,7 @@ import ProtectedRoute from './config/ProtectedRoute';
 import AdminDashboard from './components/admin/dashbord/AdminDashboard';
 import Unauthorized from './components/unauthorized/Unauthorized';
 import { RoleEnum } from './utils/role.enum';
+import MyReservations from './components/reservation-user/MyReservations';
 import "./styles/appError.css";
 import './styles/globals.css';
 const NotFound = () => (
@@ -45,6 +46,7 @@ function App() {
           <Route path="/membership/:membershipId" element={<MembershipDetail />} />
           <Route path="/invoice" element={<InvoicePage />} />
           <Route path="/invoiceMembership" element={<InvoiceMembership />} />
+          <Route path="/my-reservations" element={<ProtectedRoute><MyReservations /></ProtectedRoute>} />
           <Route
             path="/admin/dashboard"
             element={
