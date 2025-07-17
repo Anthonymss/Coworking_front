@@ -1,9 +1,15 @@
 import React from 'react';
 import './HomePage.css';
 import { Link } from 'react-router-dom';
-import { FaStar, FaCheckCircle, FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
+import { FaStar, FaCheckCircle, FaMapMarkerAlt, FaCalendarAlt, FaSearch } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [selectedType, setSelectedType] = React.useState('');
+  const [selectedLocation, setSelectedLocation] = React.useState('');
+
   const featuredSpaces = [
     {
       id: 1,
@@ -12,7 +18,8 @@ const HomePage = () => {
       rating: 4.8,
       location: 'Centro Histórico',
       price: 2500,
-      type: 'coworking'
+      type: 'coworking',
+      amenities: ['WiFi', 'Impresión', 'Café', 'Sala de reuniones']
     },
     {
       id: 2,
@@ -21,7 +28,8 @@ const HomePage = () => {
       rating: 4.9,
       location: 'Zona Rosa',
       price: 3500,
-      type: 'meeting'
+      type: 'meeting',
+      amenities: ['Proyector', 'Pantalla', 'Videoconferencia', 'Pizarrón']
     },
     {
       id: 3,
@@ -30,7 +38,8 @@ const HomePage = () => {
       rating: 4.7,
       location: 'Polanco',
       price: 5000,
-      type: 'event'
+      type: 'event',
+      amenities: ['Escenario', 'Iluminación', 'Sonido', 'Catering']
     }
   ];
 
@@ -43,7 +52,6 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      {/* Hero Section */}
       <section className="hero-section">
         <div className="container">
           <div className="hero-content">
@@ -53,28 +61,48 @@ const HomePage = () => {
             </p>
             <div className="search-container">
               <div className="search-box">
-                <input 
-                  type="text" 
-                  placeholder="¿Qué tipo de espacio buscas?" 
-                  className="search-input"
-                />
-                <button className="search-button">
+                <div className="search-input-wrapper">
+                  <input 
+                    type="text" 
+                    placeholder="¿Qué tipo de espacio buscas?" 
+                    className="search-input"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                  <FaSearch className="search-icon" />
+                </div>
+                <button 
+                  className="search-button"
+                  onClick={() => navigate(`/spaces`)}
+                >
                   <FaMapMarkerAlt /> Buscar
                 </button>
               </div>
               <div className="search-filters">
-                <select className="filter-select">
-                  <option value="">Tipo de espacio</option>
-                  <option value="coworking">Coworking</option>
-                  <option value="meeting">Salas de reuniones</option>
-                  <option value="event">Espacios para eventos</option>
-                </select>
-                <select className="filter-select">
-                  <option value="">Ubicación</option>
-                  <option value="centro">Centro</option>
-                  <option value="polanco">Polanco</option>
-                  <option value="zona-rosa">Zona Rosa</option>
-                </select>
+                <div className="filter-group">
+                  <select 
+                    className="filter-select"
+                    value={selectedType}
+                    onChange={(e) => setSelectedType(e.target.value)}
+                  >
+                    <option value="">Tipo de espacio</option>
+                    <option value="coworking">Coworking</option>
+                    <option value="meeting">Salas de reuniones</option>
+                    <option value="event">Espacios para eventos</option>
+                  </select>
+                </div>
+                <div className="filter-group">
+                  <select 
+                    className="filter-select"
+                    value={selectedLocation}
+                    onChange={(e) => setSelectedLocation(e.target.value)}
+                  >
+                    <option value="">Ubicación</option>
+                    <option value="cusco">Cusco</option>
+                    <option value="lima">Lima</option>
+                    <option value="arequipa">Arequipa</option>
+                  </select>
+                </div>
               </div>
             </div>
             <div className="hero-buttons">
@@ -85,7 +113,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Featured Spaces */}
       <section className="featured-section">
         <div className="container">
           <h2 className="section-title">Espacios Destacados</h2>
@@ -103,7 +130,8 @@ const HomePage = () => {
                     <FaMapMarkerAlt className="location-icon" />
                     <span>{space.location}</span>
                   </div>
-                  <div className="space-price">
+                  <div className="space-amenities">
+
                     <span className="price">${space.price}</span>
                     <span className="period">/mes</span>
                   </div>
@@ -117,7 +145,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
       <section className="stats-section">
         <div className="container">
           <h2 className="section-title">Por qué elegirnos</h2>
@@ -132,7 +159,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Categories Section */}
       <section className="categories-section">
         <div className="container">
           <h2 className="section-title">Tipos de Espacios</h2>
@@ -165,7 +191,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="cta-section">
         <div className="container">
           <div className="cta-content">
