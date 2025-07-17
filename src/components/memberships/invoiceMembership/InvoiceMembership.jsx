@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useState } from 'react';
 import { useLocation } from "react-router-dom";
 import {
   PDFDownloadLink,
@@ -72,9 +73,13 @@ const InvoicePDF = ({ invoiceData, membershipType }) => (
   </Document>
 );
 
+
+
 export default function InvoiceMembership() {
   const location = useLocation();
   const { invoiceData } = location.state || {};
+  const membresiaId = invoiceData?.membresiaId;
+  const [loadingPayment, setLoadingPayment] = useState(false);
 
   if (!invoiceData) {
     return <p>Cargando información de la factura...</p>;
@@ -97,6 +102,45 @@ export default function InvoiceMembership() {
       console.log("Valor desconocido para tipo:", tipo);
       membershipType = "Desconocido";
   }
+
+  const handlePago = async () => {
+    console.log("Enviando al backend:");
+  console.log({
+    title: `${membershipType} Membresía`,
+    quantity: 1,
+    unitPrice: invoiceData.total,
+    tipo: "membresia",
+    membresiaId: invoiceData.membresiaId,
+  });
+    setLoadingPayment(true);
+  try {
+    const response = await fetch("http://localhost:3500/api/mercado", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: `${membershipType} Membresía`,
+        quantity: 1,
+        unitPrice: invoiceData.total,
+        membresiaId: invoiceData.membresiaId,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.init_point) {
+      window.open(data.init_point, "_blank");
+    } else {
+      alert("Error al generar enlace de pago");
+      console.log("Respuesta del backend:", data);
+    }
+  } catch (error) {
+    console.error("Error al generar el pago:", error);
+    alert("Ocurrió un error al procesar el pago");
+  }finally{
+    setLoadingPayment(false);
+  }
+};
+console.log("invoiceData completo:", invoiceData);
 
   return (
     <div className="invoice-container">
@@ -135,6 +179,13 @@ export default function InvoiceMembership() {
       >
         {({ loading }) => (loading ? "Generando PDF..." : "Descargar PDF")}
       </PDFDownloadLink>
+      {invoiceData.metodoPago === "MERCADO_PAGO" &&(
+      <div style={{display: 'flex',justifyContent: 'center',width: '100%',marginTop: '30px'}}>
+          <button className="mercadoPago-button" onClick={handlePago}disabled={loadingPayment}>
+            <img src="https://www.mercadopago.com/org-img/MP3/home/logomp3.gif" alt="Mercado Pago" height="20" style={{ marginRight: '8px' }} />
+            {loadingPayment ? 'Redirigiendo...' : 'Pagar con Mercado Pago'}
+          </button>
+        </div>)}
     </div>
   );
 }

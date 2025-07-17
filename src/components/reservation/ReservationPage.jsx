@@ -154,12 +154,12 @@ export default function ReservationPage() {
                     <input
                       type="radio"
                       name="paymentMethod"
-                      value="Tarjeta de Crédito"
-                      checked={selectedPaymentMethod === 'Tarjeta de Crédito'}
+                      value="Mercado Pago"
+                      checked={selectedPaymentMethod === 'Mercado Pago'}
                       onChange={(e) => setSelectedPaymentMethod(e.target.value)}
                       required
                     />
-                    Tarjeta de Crédito
+                    Mercado Pago
                   </label>
                   <label>
                     <input

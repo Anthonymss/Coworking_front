@@ -71,6 +71,7 @@ export default function MembershipDetail() {
     MembershipService.createMembership(payload)
       .then((response) => {
         console.log("Membresía adquirida con éxito:", response.data);
+        response.data.membresiaId = membership.id;
         navigate('/invoiceMembership', { state: { invoiceData: response.data } });
       })
       .catch((error) => {
@@ -129,7 +130,7 @@ export default function MembershipDetail() {
           <div className="popup">
             <h2>Selecciona tu método de pago:</h2>
             <div className="payment-options">
-              <button className="btn" onClick={() => handlePayment("CREDIT_CARD")}>Tarjeta de Crédito</button>
+              <button className="btn" onClick={() => handlePayment("MERCADO_PAGO")}>Mercado Pago</button>
               <button className="btn" onClick={() => handlePayment("PAYPAL")}>PayPal</button>
               <button className="btn" onClick={() => handlePayment("BANK_TRANSFER")}>Transferencia Bancaria</button>
             </div>

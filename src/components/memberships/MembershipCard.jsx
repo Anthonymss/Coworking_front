@@ -1,7 +1,7 @@
 import React from 'react';
 import './MembershipCard.css';
 
-export default function MembershipCard({ title, features, price }) {
+export default function MembershipCard({  title, features, price }) {
   return (
     <div className="membership-card">
       <h3 className="membership-title">{title}</h3>

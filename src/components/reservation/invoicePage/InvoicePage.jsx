@@ -1,8 +1,9 @@
 import { Document, Page, PDFDownloadLink, StyleSheet, Text, View } from '@react-pdf/renderer';
-import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './InvoicePage.css';
+import React, { useState } from 'react';
 
+  
 const styles = StyleSheet.create({
   page: {
     padding: 20,
@@ -77,6 +78,9 @@ const styles = StyleSheet.create({
 export default function InvoicePage() {
   const { state } = useLocation();
   const invoiceData = state?.invoiceData;
+  const reservaId = invoiceData?.reservationId;
+  const [loadingPayment, setLoadingPayment] = useState(false);
+
 
   if (!invoiceData) {
     return <div>No hay datos de la factura disponibles.</div>;
@@ -109,6 +113,44 @@ export default function InvoicePage() {
   const formattedSpaceDetails = spaceDetails
     .split(';')
     .map((detail, index) => `${SpaceNamesDetail[index]} ${detail.trim()}`);
+
+  const handleMercadoPago = async () => {
+    setLoadingPayment(true);
+  try {
+          const bodyData = {
+          title: spaceDetails?.split(';')[2]?.trim() || 'Reserva Coworking',
+          quantity: 1,
+          unitPrice: totalCost || 0,
+          reservaId: reservaId
+        };
+    const response = await fetch('http://localhost:3500/api/mercado', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: spaceDetails?.split(';')[2]?.trim() || 'Reserva Coworking',
+        quantity: 1,
+        unitPrice: totalCost || 0,
+        reservaId: reservaId
+      })
+    });
+
+    const data = await response.json();
+    if (data.init_point) {
+      window.open(data.init_point, '_blank');
+    } else {
+      alert('No se pudo generar el enlace de pago.');
+    }
+  } catch (error) {
+    console.error('Error al conectar con Mercado Pago:', error);
+    alert('Error al procesar el pago.');
+  }finally{
+    setLoadingPayment(false);
+  }
+};  
+
+
 
   const InvoiceDocument = () => (
     <Document>
@@ -250,6 +292,13 @@ export default function InvoicePage() {
           </button>
         )}
       </PDFDownloadLink>
+      {paymentMethod === 'Mercado Pago' && (
+        <div style={{display: 'flex',justifyContent: 'center',width: '100%',marginTop: '30px'}}>
+          <button className="mercadoPago-button" onClick={handleMercadoPago}disabled={loadingPayment}>
+            <img src="https://www.mercadopago.com/org-img/MP3/home/logomp3.gif" alt="Mercado Pago" height="20" style={{ marginRight: '8px' }} />
+            {loadingPayment ? 'Redirigiendo...' : 'Pagar con Mercado Pago'}
+          </button>
+        </div>)}
     </div>
   );
 }

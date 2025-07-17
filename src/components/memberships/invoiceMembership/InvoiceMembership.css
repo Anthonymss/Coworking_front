@@ -53,3 +53,21 @@
     background-color: #0056b3;
   }
   
+
+  .mercadoPago-button {
+  display: flex;
+  align-items: center;
+  background-color: #009ee3;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.mercadoPago-button:hover {
+  background-color: #007cb3;
+}
